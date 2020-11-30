@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-
-const Scoreboard = () => {
+const Scoreboard = (props) => {
 
     return (
         <div className = "row">
             <div className= "col">
-                <p>Score: </p>
-                <p>Best:</p>
+                <p>Score: {props.score}</p>
+                <p>Best: {props.hiScore}</p>
             </div>
         </div>
     );

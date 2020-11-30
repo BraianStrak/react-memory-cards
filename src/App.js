@@ -1,12 +1,38 @@
 import './App.css';
 import Scoreboard from "./components/Scoreboard"
 import Card from "./components/Card"
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 
 function App() {  
+  const [cardsArr, addCard] = useState([]);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
-  //can have a function called resetgame, and we can pass it to the thingy and call it onclick if the thing was low enough 
+  const pushCard = (number) => {
+    addCard((oldArr) => [...oldArr, number]);
+  };
+
+  const handleHighScore = (number) => {
+    if(highScore < number){
+      setHighScore(number);
+    }
+  }
+
+  const reset = () => {
+    setScore(0);
+    addCard([]);
+  }
+
+  const handleGameLogic = (cardNumber) => {
+    if (!cardsArr.includes(cardNumber)) {
+      pushCard(cardNumber);
+      setScore(score+1);
+    } else {
+      handleHighScore(score);
+      reset();
+    }
+  }
 
   return (
     <div className="container-fluid">
@@ -16,18 +42,18 @@ function App() {
         </div>
       </div>
 
-      <Scoreboard />
+      <Scoreboard score = {score} hiScore = {highScore}/>
 
       <div className="row d-flex">
-        <Card number = {1} />
-        <Card number = {2} />
-        <Card number = {3} />
-        <Card number = {4} />
-        <Card number = {5} />
-        <Card number = {6} />
-        <Card number = {7} />
-        <Card number = {8} />
-        <Card number = {9} />
+        <Card number = {1} handleGameLogic={handleGameLogic} />
+        <Card number = {2} handleGameLogic={handleGameLogic} />
+        <Card number = {3} handleGameLogic={handleGameLogic} />
+        <Card number = {4} handleGameLogic={handleGameLogic} /> 
+        <Card number = {5} handleGameLogic={handleGameLogic} />
+        <Card number = {6} handleGameLogic={handleGameLogic} />
+        <Card number = {7} handleGameLogic={handleGameLogic} />
+        <Card number = {8} handleGameLogic={handleGameLogic} />
+        <Card number = {9} handleGameLogic={handleGameLogic} />
       </div>
     </div>
   );

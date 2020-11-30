@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 const Card = (props) => {
+
     //gets a random integer
     const getRandomInt = (max) => {
         return Math.floor(Math.random() * Math.floor(max));
@@ -15,8 +16,8 @@ const Card = (props) => {
     });
 
     return (
-        <button className = "bg-primary p-2 m-2" id = {props.number}>
-            I am card {props.number}
+        <button onClick={() => props.handleGameLogic(props.number)} className = "bg-primary p-2 m-2" id = {props.number}>
+            Card {props.number}
         </button>
     );
 };
